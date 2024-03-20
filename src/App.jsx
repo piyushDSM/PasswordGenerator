@@ -9,17 +9,17 @@ function App() {
 
   //useRef hook
 
-  const passwordRef = useRef(null)
+  const passwordRef = useRef(null);
 
-
-  const passwordGenerator = useCallback(() => {                                      //Callback
+  const passwordGenerator = useCallback(() => {
+    //Callback
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     if (numberAllowed) str += "0123456789";
     if (charAllowed) str += "`!#$%^&*-_{}[]/|?~";
 
-    for (let i = 1; i <=length; i++) {
+    for (let i = 1; i <= length; i++) {
       let char = Math.floor(Math.random() * str.length + 1);
 
       pass += str.charAt(char);
@@ -29,14 +29,15 @@ function App() {
   }, [length, numberAllowed, charAllowed, setPassword]);
 
   const copyPasswordToClip = useCallback(() => {
-    passwordRef.current?.select()
-    passwordRef.current?.setSelectionRange(0, 20)
-    window.navigator.clipboard.writeText(password)
-  }, [password])
+    passwordRef.current?.select();
+    passwordRef.current?.setSelectionRange(0, 20);
+    window.navigator.clipboard.writeText(password);
+  }, [password]);
 
-  useEffect(() => {                                                                 //useEffect
-    passwordGenerator ()
-  }, [length, charAllowed, numberAllowed, passwordGenerator])
+  useEffect(() => {
+    //useEffect
+    passwordGenerator();
+  }, [length, charAllowed, numberAllowed, passwordGenerator]);
 
   return (
     <>
@@ -49,48 +50,51 @@ function App() {
             className="outline-none w-full py-1 px-3"
             placeholder="Password"
             readOnly
-            ref= {passwordRef}
+            ref={passwordRef}
           />
           <button
-          onClick={copyPasswordToClip} 
-          className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0">
+            onClick={copyPasswordToClip}
+            className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0"
+          >
             Copy
           </button>
         </div>
         <div className="flex text-sm gap-x-2">
-            <div className="flex items-center gap-x-1">
-              <input type="range" 
+          <div className="flex items-center gap-x-1">
+            <input
+              type="range"
               min={6}
-              max = {20} 
-              value= {length}
+              max={20}
+              value={length}
               className="cursor-pointer"
-              onChange={(e) => {setLength(e.target.value)}}
-              />
-              <label> Length: {length} </label>
-            </div>
-            <div className="flex items-center gap-x-1">
-              <input 
+              onChange={(e) => {
+                setLength(e.target.value);
+              }}
+            />
+            <label> Length: {length} </label>
+          </div>
+          <div className="flex items-center gap-x-1">
+            <input
               type="checkbox"
               defaultChecked={numberAllowed}
               id="numberInput"
-              onChange = {() =>{
-              setNumberAllowed ((prev) => !prev);
+              onChange={() => {
+                setNumberAllowed((prev) => !prev);
               }}
-               />
-               <label htmlFor="numberInput">Numbers</label>
-            </div>
-            <div className="flex items-center gap-x-1">
-              <input 
+            />
+            <label htmlFor="numberInput">Numbers</label>
+          </div>
+          <div className="flex items-center gap-x-1">
+            <input
               type="checkbox"
               defaultChecked={charAllowed}
               id="characterInput"
-              onChange = {() =>{
-              setCharAllowed ((prev) => !prev);
+              onChange={() => {
+                setCharAllowed((prev) => !prev);
               }}
-               />
-               <label htmlFor="characterInput">Characters</label>
-            </div>
-
+            />
+            <label htmlFor="characterInput">Characters</label>
+          </div>
         </div>
       </div>
     </>
