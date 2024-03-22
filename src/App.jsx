@@ -11,8 +11,9 @@ function App() {
 
   const passwordRef = useRef(null);
 
+  //Callback
   const passwordGenerator = useCallback(() => {
-    //Callback
+    
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
@@ -34,8 +35,9 @@ function App() {
     window.navigator.clipboard.writeText(password);
   }, [password]);
 
-  useEffect(() => {
     //useEffect
+  useEffect(() => {
+  
     passwordGenerator();
   }, [length, charAllowed, numberAllowed, passwordGenerator]);
 
