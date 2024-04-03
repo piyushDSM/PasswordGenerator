@@ -12,7 +12,6 @@ function App() {
 
   //Callback
   const passwordGenerator = useCallback(() => {
-    
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
@@ -34,10 +33,9 @@ function App() {
     window.navigator.clipboard.writeText(password);
   }, [password]);
 
-    //useEffect
+  //useEffect
   useEffect(() => {
-   passwordGenerator();
-   
+    passwordGenerator();
   }, [length, charAllowed, numberAllowed, passwordGenerator]);
 
   return (
